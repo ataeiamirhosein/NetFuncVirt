@@ -1,1 +1,3 @@
 # MultibitTrie
+
+MultibitTrie algorithm
