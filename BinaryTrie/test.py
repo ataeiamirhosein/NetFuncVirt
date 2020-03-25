@@ -1,3 +1,4 @@
+
 import unittest
 from trie import *
 
@@ -35,3 +36,4 @@ class TestForwardingTable(unittest.TestCase):
 
   def test_lookup8(self):
       self.assertEqual(self.trie.lookup("55.150.0.0"), 6)
+      
