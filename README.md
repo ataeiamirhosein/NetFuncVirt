@@ -4,15 +4,16 @@
 
 #### Usage:
 ```
-import BinaryTrie
+import BinaryNode
 ```
 
 to use a custom prefix table:
 - just edit the db.txt file. Be careful to respect the file format (ip\mask, ip_in_binary)
 
+
 create the Binary Trie:
 ```
-root = BinaryTrie.Create('Default value')
+root = BinaryNode.Create('Default value')
 ```
 where the 'Default value' is the default prefix that is returned whenever the lookup fails (e.g. '0')
 
@@ -31,19 +32,21 @@ You can also build manually the trie (the 'db.txt' file will be ignored):
 ```
 import BinaryTrie
 
-root = BinaryTrie.BinaryTrie('0')
+root = BinaryNode.BinaryNode('0')
 root.AddChild("189.xxx.xxx.xxx", '101111')
 ```
+
 #
 
 ### Multibit Trie
 #### Usage:
 ```
-import MultibitTrie
+import MultibitNode
 ```
 
 to use a custom prefix table:
 - just edit the db.txt file. Be careful to respect the file format (ip\mask, ip_in_binary)
+
 
 > EXPERIMENTAL: You can also change the Stride of the Trie:
 ```
@@ -52,12 +55,12 @@ MultibitTrie.STRIDE = 2
 
 Create the Trie:
 ```
-root = MultibitTrie.Create()
+root = MultibitNode.Create()
 ```
 
 find longest prefix match:
 ```
-MultibitTrie.Lookup(binary_address, 'Default value')
+MultibitNode.Lookup(binary_address, 'Default value')
 ```
 where:
  - binary_address is the binary representation of an IP address 

@@ -25,8 +25,8 @@ from ryu.lib.packet import udp
 from ryu.ofproto import ether
 from ryu.app.ofctl.api import get_datapath
 from timeit import default_timer
-import BinaryTrie
-import MultibitTrie
+import BinaryNode
+import MultibitNode
 
 # Packet Classification parameters
 SRC_IP = 0
@@ -136,7 +136,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             self.ip_to_mac["192.169.0.1"] = "00:00:00:00:00:07"
             self.ip_to_mac["192.170.0.1"] = "00:00:00:00:00:08"
 
-        if TRIE == 0:  # BinaryTrie
+        if TRIE == 0:  # Binary Trie
             self.trie_root = BinaryNode.BinaryNode('0')
 
             for key, value in self.switch.iteritems():
@@ -148,7 +148,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
             self.logger.info("BinaryTrie created")
 
-        elif TRIE == 1:  # MultibitTrie
+        elif TRIE == 1:  # Multibit Trie
             self.trie_root = MultibitNode.MultibitNode()
 
             for entry in self.order_switch():  # order_switch is used to have and ordinated list of ips base on mask length
@@ -320,12 +320,11 @@ class SimpleSwitch13(app_manager.RyuApp):
                              dpid_src, src_ip, dst_ip, in_port)
 
             # PACKET CLASSIFICATION FUNCTION: it returns action: "allow" or "deny"
-         
+
             action_rule = "allow"
 
             if action_rule == "allow":
                 # IP LOOKUP FUNCTION: it is zero if it didn't find a solution
-            
                 destination_switch_IP = self.binary_search(dst_ip)
 
                 if destination_switch_IP != "0":
@@ -349,12 +348,13 @@ class SimpleSwitch13(app_manager.RyuApp):
                         data = msg.data
                         pkt = packet.Packet(data)
                         eth = pkt.get_protocols(ethernet.ethernet)[0]
-                        # self.logger.info(" --- Changing destination mac to %s" % (eth.dst))
+
                         pkt.serialize()
                         out = datapath.ofproto_parser.OFPPacketOut(
                             datapath=datapath, buffer_id=0xffffffff, in_port=datapath.ofproto.OFPP_CONTROLLER,
                             actions=actions, data=pkt.data)
                         datapath.send_msg(out)
+
 
                     elif len(path) == 2:
                         path_port = self.net[path[0]][path[1]]['port']
@@ -364,7 +364,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                         eth = pkt.get_protocols(ethernet.ethernet)[0]
                         eth.src = self.ip_to_mac[src_ip]
                         eth.dst = self.ip_to_mac[dst_ip]
-                        # self.logger.info(" --- Changing destination mac to %s" % (eth.dst))
+
                         pkt.serialize()
                         out = datapath.ofproto_parser.OFPPacketOut(
                             datapath=datapath, buffer_id=0xffffffff, in_port=datapath.ofproto.OFPP_CONTROLLER,
@@ -377,6 +377,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                             In_Port = self.net[path[i]][path[i - 1]]['port']
                             Out_Port = self.net[path[i]][path[i + 1]]['port']
                             dp = get_datapath(self, path[i])
+
 
                             actions_1 = [dp.ofproto_parser.OFPActionOutput(Out_Port)]
                             match_1 = parser.OFPMatch(in_port=In_Port, eth_type=0x0800, ipv4_src=src_ip,
@@ -391,7 +392,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                         # change the mac address of packet
                         eth.src = self.ip_to_mac[src_ip]
                         eth.dst = self.ip_to_mac[dst_ip]
-                        # self.logger.info(" --- Changing destination mac to %s" % (eth.dst))
+
                         pkt.serialize()
                         out = datapath.ofproto_parser.OFPPacketOut(
                             datapath=datapath, buffer_id=0xffffffff, in_port=datapath.ofproto.OFPP_CONTROLLER,
