@@ -4,7 +4,7 @@
 
 #### Usage:
 ```
-import BinaryNode
+import BinaryTrie
 ```
 
 to use a custom prefix table:
@@ -12,7 +12,7 @@ to use a custom prefix table:
 
 create the Binary Trie:
 ```
-root = BinaryNode.Create('Default value')
+root = BinaryTrie.Create('Default value')
 ```
 where the 'Default value' is the default prefix that is returned whenever the lookup fails (e.g. '0')
 
@@ -31,7 +31,7 @@ You can also build manually the trie (the 'db.txt' file will be ignored):
 ```
 import BinaryTrie
 
-root = BinaryNode.BinaryNode('0')
+root = BinaryTrie.BinaryTrie('0')
 root.AddChild("189.xxx.xxx.xxx", '101111')
 ```
 #
@@ -39,7 +39,7 @@ root.AddChild("189.xxx.xxx.xxx", '101111')
 ### Multibit Trie
 #### Usage:
 ```
-import MultibitNode
+import MultibitTrie
 ```
 
 to use a custom prefix table:
@@ -52,12 +52,12 @@ MultibitTrie.STRIDE = 2
 
 Create the Trie:
 ```
-root = MultibitNode.Create()
+root = MultibitTrie.Create()
 ```
 
 find longest prefix match:
 ```
-MultibitNode.Lookup(binary_address, 'Default value')
+MultibitTrie.Lookup(binary_address, 'Default value')
 ```
 where:
  - binary_address is the binary representation of an IP address 
