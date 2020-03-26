@@ -3,7 +3,7 @@ import timeit
 
 STRIDE = 3
 
-class MultibitNode(object):
+class MultibitTrie(object):
     def __init__(self):
         self.children = {}
 
@@ -29,10 +29,10 @@ class MultibitNode(object):
             
             # If we don't have this value in the dictionary yet, make a new node with no prefix
             if first not in self.children:
-                self.children[first] = ("", MultibitNode())
+                self.children[first] = ("", MultibitTrie())
             # Otherwise keep the existing prefix and just create a child node
             elif self.children[first][1] is None:
-                self.children[first] = (self.children[first][0], MultibitNode())
+                self.children[first] = (self.children[first][0], MultibitTrie())
 
             self.children[first][1].AddChild(prefix, path[STRIDE:])
 
@@ -92,7 +92,7 @@ def GetCombinations(length):
 
 def Create():
     # helper method to rapidly create the trie reading the db.txt
-    _root = MultibitNode()
+    _root = MultibitTrie()
     with open("db.txt", 'r') as f:  # reading db for creating the trie
         my_list = [line.rstrip('\n') for line in f]
 
