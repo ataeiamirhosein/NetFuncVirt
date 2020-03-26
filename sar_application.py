@@ -25,8 +25,8 @@ from ryu.lib.packet import udp
 from ryu.ofproto import ether
 from ryu.app.ofctl.api import get_datapath
 from timeit import default_timer
-import BinaryNode
-import MultibitNode
+import BinaryTrie
+import MultibitTrie
 
 # Packet Classification parameters
 SRC_IP = 0
@@ -43,10 +43,8 @@ IP = 0
 SUBNET = 1
 DPID = 2
 
-
 # Topologies
 TOPO = 2
-
 
 class SimpleSwitch13(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
@@ -138,7 +136,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             self.ip_to_mac["192.169.0.1"] = "00:00:00:00:00:07"
             self.ip_to_mac["192.170.0.1"] = "00:00:00:00:00:08"
 
-        if TRIE == 0:  # Binary Trie
+        if TRIE == 0:  # BinaryTrie
             self.trie_root = BinaryNode.BinaryNode('0')
 
             for key, value in self.switch.iteritems():
@@ -150,7 +148,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
             self.logger.info("BinaryTrie created")
 
-        elif TRIE == 1:  # Multibit Trie
+        elif TRIE == 1:  # MultibitTrie
             self.trie_root = MultibitNode.MultibitNode()
 
             for entry in self.order_switch():  # order_switch is used to have and ordinated list of ips base on mask length
@@ -161,13 +159,8 @@ class SimpleSwitch13(app_manager.RyuApp):
 
             self.logger.info("MultibitTrie created")
 
-
-
     def order_switch(self):
-        '''
-        helper method to build a sorted list of tuples
-        :return: list of tuples (ip, mask) sorted by mask length
-        '''
+
         tuples = []
         for key, value in self.switch.iteritems():
             tuples.append((value[0], value[1]))  # append ip, mask
@@ -265,7 +258,6 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.net.add_edges_from(links)
         links = [(link.dst.dpid, link.src.dpid, {'port': link.dst.port_no}) for link in links_list]
         self.net.add_edges_from(links)
-        # print links
 
         # MAC LEARNING-------------------------------------------------
 
@@ -276,7 +268,6 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.mac_to_dpid[src] = dpid_src
         self.port_to_mac[dpid_src][in_port] = src
         self.logger.info("Packet in the controller from switch: %s", dpid_src)
-        # print self.mac_to_port
 
         # HANDLE ARP PACKETS--------------------------------------------
 
@@ -284,8 +275,6 @@ class SimpleSwitch13(app_manager.RyuApp):
             arp_packet = pkt.get_protocol(arp.arp)
             arp_dst_ip = arp_packet.dst_ip
             arp_src_ip = arp_packet.src_ip
-            # self.logger.info("ARP packet from switch: %s source IP: %s destination IP: %s from port: %s", dpid_src, arp_src_ip, arp_dst_ip, in_port)
-            # self.logger.info("ARP packet from switch: %s source MAC: %s destination MAC:%s from port: %s", dpid_src, src, dst, in_port)
 
             if arp_dst_ip in self.ip_to_mac:
                 if arp_packet.opcode == 1:
@@ -331,12 +320,12 @@ class SimpleSwitch13(app_manager.RyuApp):
                              dpid_src, src_ip, dst_ip, in_port)
 
             # PACKET CLASSIFICATION FUNCTION: it returns action: "allow" or "deny"
-            # action_rule = self.linear_classification(src_ip, dst_ip, proto, sport, dport)
+         
             action_rule = "allow"
 
             if action_rule == "allow":
                 # IP LOOKUP FUNCTION: it is zero if it didn't find a solution
-                # destination_switch_IP = self.linear_search(dst_ip)
+            
                 destination_switch_IP = self.binary_search(dst_ip)
 
                 if destination_switch_IP != "0":
@@ -367,7 +356,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                             actions=actions, data=pkt.data)
                         datapath.send_msg(out)
 
-
                     elif len(path) == 2:
                         path_port = self.net[path[0]][path[1]]['port']
                         actions = [datapath.ofproto_parser.OFPActionOutput(path_port)]
@@ -389,7 +377,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                             In_Port = self.net[path[i]][path[i - 1]]['port']
                             Out_Port = self.net[path[i]][path[i + 1]]['port']
                             dp = get_datapath(self, path[i])
-                            # self.logger.info("Matched OpenFlow Rule = switch: %s, from in port: %s, to out port: %s, source IP: %s, and destination IP: %s", path[i], In_Port, Out_Port, src_ip, dst_ip)
 
                             actions_1 = [dp.ofproto_parser.OFPActionOutput(Out_Port)]
                             match_1 = parser.OFPMatch(in_port=In_Port, eth_type=0x0800, ipv4_src=src_ip,
@@ -422,15 +409,6 @@ class SimpleSwitch13(app_manager.RyuApp):
         links = [(link.dst.dpid, link.src.dpid, {'port': link.dst.port_no}) for link in links_list]
         self.net.add_edges_from(links)
 
-    # print "**********List of links"
-    # print self.net.edges()
-    # for link in links_list:
-    # print link.dst
-    # print link.src
-    # print "Novo link"
-    # self.no_of_links += 1
-
-    # -------------------------------------------------------------------------------------------------------
     # CUSTOM CODE
     def binary_search(self, dst_ip):
 
@@ -453,8 +431,6 @@ class SimpleSwitch13(app_manager.RyuApp):
             end = default_timer() - start
             self.logger.info("Multibit trie returned: " + str(destination_switch_ip))
             self.logger.info("time elapsed: " + str(end*1000) + "ms")
-
-
 
         if destination_switch_ip != '':
             return destination_switch_ip
@@ -489,7 +465,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                 return action
 
         return action
-
 
 app_manager.require_app('ryu.app.ws_topology')
 app_manager.require_app('ryu.app.ofctl_rest')
