@@ -65,5 +65,8 @@ MultibitNode.Lookup(binary_address, 'Default value')
 where:
  - binary_address is the binary representation of an IP address 
  - 'Default value' is the value the is returned in case Lookup fails (e.g. '0')  
+ 
 #
+
+**Resault**  
 ![nfv resault](https://www.iotco.net/nfv.jpg)
