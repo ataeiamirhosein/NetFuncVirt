@@ -27,7 +27,6 @@ from ryu.app.ofctl.api import get_datapath
 from timeit import default_timer
 import BinaryNode
 import MultibitNode
-import CompressedNode
 
 # Packet Classification parameters
 SRC_IP = 0
@@ -37,7 +36,7 @@ SPORT = 3
 DPORT = 4
 ACTION = 5
 
-TRIE = 1  # choosing the type of trie to use: 0 for Binary, 1 for Multibit, 2 for Compressed
+TRIE = 1  # choosing the type of trie to use: 0 for Binary, 1 for Multibit
 
 # IP lookup parameters
 IP = 0
@@ -162,17 +161,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
             self.logger.info("MultibitTrie created")
 
-        elif TRIE == 2:  # Compressed Trie
-            self.trie_root = CompressedNode.CompressedNode("0")
 
-            for key, value in self.switch.iteritems():
-                ip = value[0]
-                mask = int(value[1])
-                binary_address = CompressedNode.convert_in_bin(key)[:mask]  # take only the network part of address
-
-                self.trie_root.AddChild(ip, binary_address)
-
-            self.logger.info("CompressedTrie created")
 
     def order_switch(self):
         '''
@@ -465,14 +454,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             self.logger.info("Multibit trie returned: " + str(destination_switch_ip))
             self.logger.info("time elapsed: " + str(end*1000) + "ms")
 
-        elif TRIE == 2:
-            self.logger.info(" --- IP Lookup with Compressed Trie")
-            binary_dst = CompressedNode.convert_in_bin(dst_ip)
-            start = default_timer()
-            destination_switch_ip = self.trie_root.Lookup(binary_dst)
-            end = default_timer() - start
-            self.logger.info("compressed trie returned: " + str(destination_switch_ip))
-            self.logger.info("time elapsed: " + str(end*1000) + "ms")
+
 
         if destination_switch_ip != '':
             return destination_switch_ip
