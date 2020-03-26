@@ -1,6 +1,5 @@
 ### Tries data structures made for IP lookups in Ryu Framework
 
-## Getting started
 ### Binary Trie
 
 #### Usage:
@@ -35,7 +34,6 @@ import BinaryTrie
 root = BinaryNode.BinaryNode('0')
 root.AddChild("189.xxx.xxx.xxx", '101111')
 ```
-
 #
 
 ### Multibit Trie
