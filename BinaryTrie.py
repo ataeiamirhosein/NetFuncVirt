@@ -1,6 +1,5 @@
 import timeit
 
-
 class BinaryNode(object):
     def __init__(self, NextHop=""):
         self.NextHop = NextHop  # here we save the value of the leaf node
@@ -75,7 +74,6 @@ class BinaryNode(object):
 
         return backtrack
 
-
 def Create(default_value='0'):
     # helper method to rapidly create the trie reading the db.txt
 
@@ -92,7 +90,6 @@ def Create(default_value='0'):
 
     return _root
 
-
 def convert_in_bin(address):
     # simple method to convert an IP address in its binary representation
     if address.find('\\') != -1:
@@ -102,7 +99,6 @@ def convert_in_bin(address):
     else:
         return ''.join([bin(int(x) + 256)[3:] for x in address.split('.')])
 
-
 def _is_binary(string):
     is_binary = True
     try:
@@ -110,7 +106,6 @@ def _is_binary(string):
     except ValueError:
         is_binary = False
     return is_binary
-
 
 # DEBUG
 if __name__ == "__main__":
