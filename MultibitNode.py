@@ -3,7 +3,6 @@ import timeit
 
 STRIDE = 3
 
-
 class MultibitNode(object):
     def __init__(self):
         self.children = {}
@@ -47,9 +46,9 @@ class MultibitNode(object):
         if len(address) < STRIDE or first not in self.children:
             return backtrack
 
-        child = self.children[first]
-
         # We're here when address is at least as long as the stride
+        
+        child = self.children[first]
         
         # If it's as long as the stride, or there is no pointer to another multibit node
         if len(address) == STRIDE or child[1] is None:
@@ -91,7 +90,6 @@ def GetCombinations(length):
     char_set = [0, 1]
     return [''.join(map(str, i)) for i in itertools.product(char_set, repeat=length)]
 
-
 def Create():
     # helper method to rapidly create the trie reading the db.txt
     _root = MultibitNode()
@@ -103,7 +101,6 @@ def Create():
         _root.AddChild(addr, binary_address)
 
     return _root
-
 
 def convert_in_bin(address):
     # simple method to convert an IP address in its binary representation
@@ -118,16 +115,7 @@ def convert_in_bin(address):
 if __name__ == "__main__":
 
     root = Create()
-
-    # Qui stiamo cercando 000. Se non lo trova usiamo il backtrack Default
-    # print (root.lookup("000", 'Default'))
     
-    # Qui stiamo cercando 010. Se non lo trova usiamo il backtrack Default altrimenti printa l'ip per intero
-    # print (root.lookup("010", "Default"))
-    
-    # L'indirizzo che usavi tu aveva una mask non multipla di 3 quindi fa casino quando va a cercarlo, ricordi? Quindi fa sempre backtrack sul Default!
-
-
     with open("tosearch.txt", 'r') as f:  # reading for lookups
        my_list = [line.rstrip('\n') for line in f]
 
