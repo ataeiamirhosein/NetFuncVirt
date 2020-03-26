@@ -71,4 +71,6 @@ where:
 
 **Result**  
 
+result with considering the time complexity of algorithm
+
 ![nfv resault](https://www.iotco.net/nfv.jpg)
