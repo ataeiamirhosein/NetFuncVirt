@@ -1,6 +1,6 @@
 import timeit
 
-class BinaryNode(object):
+class BinaryTrie(object):
     def __init__(self, NextHop=""):
         self.NextHop = NextHop  # here we save the value of the leaf node
         self.Left = None  # 0's branch
@@ -12,19 +12,19 @@ class BinaryNode(object):
 
         if len(path) == 1:
             if path == "0":
-                self.Left = BinaryNode(NextHop=prefix)
+                self.Left = BinaryTrie(NextHop=prefix)
             else:
-                self.Right = BinaryNode(NextHop=prefix)
+                self.Right = BinaryTrie(NextHop=prefix)
         elif len(path) > 1:
             if path.startswith("0"):
                 if self.Left is None:
-                    self.Left = BinaryNode()
+                    self.Left = BinaryTrie()
 
                 self.Left.AddChild(prefix, path[1:])
 
             else:
                 if self.Right is None:
-                    self.Right = BinaryNode()
+                    self.Right = BinaryTrie()
 
                 self.Right.AddChild(prefix, path[1:])
 
@@ -77,7 +77,7 @@ class BinaryNode(object):
 def Create(default_value='0'):
     # helper method to rapidly create the trie reading the db.txt
 
-    _root = BinaryNode(default_value)
+    _root = BinaryTrie(default_value)
 
     with open("db.txt", 'r') as f:
         my_list = [line.rstrip('\n') for line in f]
@@ -127,4 +127,4 @@ if __name__ == "__main__":
         end = timeit.default_timer() - start
         times.append(end * 1000)
 
-    print ("binary trie: " + str(sum(times)) + "ms")
+    print ("BinaryTrie: " + str(sum(times)) + "ms")
