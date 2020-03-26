@@ -1,7 +1,7 @@
 # Tries data structures made for IP lookups in Ryu Framework
 
 ### Binary Trie
-
+![nfv binary-trie](https://www.iotco.net/binarytrie.jpg)
 #### Usage:
 ```
 import BinaryNode
@@ -39,6 +39,7 @@ root.AddChild("189.xxx.xxx.xxx", '101111')
 #
 
 ### Multibit Trie
+![nfv multibit-trie](https://www.iotco.net/multibit.jpg)
 #### Usage:
 ```
 import MultibitNode
@@ -68,6 +69,6 @@ where:
  
 #
 
-**Resault**  
+**Result**  
 
 ![nfv resault](https://www.iotco.net/nfv.jpg)
