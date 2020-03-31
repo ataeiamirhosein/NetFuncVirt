@@ -1,3 +1,7 @@
+
+ # author Amirhosein Ataei
+ # date March 2020
+
 import timeit
 
 class BinaryNode(object):
