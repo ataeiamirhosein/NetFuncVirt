@@ -77,5 +77,8 @@ result with considering the time complexity of algorithm
 ## reference
 https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
 
-## link repo prj
+## link of prj repo (gitlab)
 https://gitlab.com/switching-and-routing-polimi-code-repository/2019-2020/project-11  
+
+#
+for course prof maier course S&R polimi
