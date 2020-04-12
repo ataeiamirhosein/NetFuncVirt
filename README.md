@@ -1,5 +1,7 @@
 # Tries data structures made for IP lookups
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/629db1e5779943f7bc873c572ffe1d6d)](https://app.codacy.com/manual/ataeiamirhosein/NetFuncVirt?utm_source=github.com&utm_medium=referral&utm_content=ataeiamirhosein/NetFuncVirt&utm_campaign=Badge_Grade_Dashboard)
+
 
 ### Binary Trie
 ![nfv binary-trie](https://www.iotco.net/binarytrie.jpg)
