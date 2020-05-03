@@ -81,7 +81,8 @@ Download the following virtual machines to develop your project:
 NFV projects: [ubuntu 16.04 LTS-server.ova](https://www.dropbox.com/s/f5tho1f01ms9f8b/ubuntu%2016.04%20LTS-server.ova?dl=0) and [ubuntu 16.04 LTS-client.ova](https://www.dropbox.com/s/b60olfpisw0q15h/ubuntu%2016.04%20LTS-client.ova?dl=0)
 
 ## reference
-https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
+- https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
+- **special thanks from Emanuele Gallone**
 
 ## link of prj repo (gitlab)
 https://gitlab.com/switching-and-routing-polimi-code-repository/2019-2020/project-11  
