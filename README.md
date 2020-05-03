@@ -82,7 +82,7 @@ NFV projects: [ubuntu 16.04 LTS-server.ova](https://www.dropbox.com/s/f5tho1f01m
 
 ## reference
 - https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
-- **special thanks from ![Emanuele Gallone](https://github.com/EmanueleGallone)**
+- **special thanks from [Emanuele Gallone](https://github.com/EmanueleGallone)**
 
 ## link of prj repo (gitlab)
 https://gitlab.com/switching-and-routing-polimi-code-repository/2019-2020/project-11  
