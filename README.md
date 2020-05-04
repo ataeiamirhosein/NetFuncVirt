@@ -82,7 +82,7 @@ NFV projects: [ubuntu 16.04 LTS-server.ova](https://www.dropbox.com/s/f5tho1f01m
 
 ## reference
 - https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
-- **special thanks to [Emanuele Gallone](https://github.com/EmanueleGallone) that helped us in the hard section of this project**
+- **special thanks to [Emanuele Gallone](https://github.com/EmanueleGallone) that helped us in the hard section of this project by providing code of the various [tries](https://github.com/EmanueleGallone/RyuTries)**
 
 #
 for course prof maier, S&R polimi
