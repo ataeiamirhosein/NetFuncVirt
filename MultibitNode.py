@@ -1,5 +1,4 @@
 
- # author Amirhosein Ataei
  # date March 2020
 
 import itertools
