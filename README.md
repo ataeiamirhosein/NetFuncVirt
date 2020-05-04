@@ -80,9 +80,9 @@ Download the following virtual machines to develop your project:
 
 NFV projects: [ubuntu 16.04 LTS-server.ova](https://www.dropbox.com/s/f5tho1f01ms9f8b/ubuntu%2016.04%20LTS-server.ova?dl=0) and [ubuntu 16.04 LTS-client.ova](https://www.dropbox.com/s/b60olfpisw0q15h/ubuntu%2016.04%20LTS-client.ova?dl=0)
 
-## reference
+## References
 - https://www.youtube.com/channel/UCebZ51n9g-B-bBMtgjMqm2w  
 - **special thanks to [Emanuele Gallone](https://github.com/EmanueleGallone) that helped us in the hard section of this project by providing code of the various [tries](https://github.com/EmanueleGallone/RyuTries)**
 
 #
-for course prof maier, S&R polimi
+for course prof maier, S&R polimi  
