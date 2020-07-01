@@ -1,7 +1,7 @@
 # Tries data structures made for IP lookups
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cf4d062267be4cb9bcd93e3174d77362)](https://www.codacy.com/manual/ataeiamirhosein/NetFuncVirt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ataeiamirhosein/NetFuncVirt&amp;utm_campaign=Badge_Grade)
 ### Binary Trie
-![nfv binary-trie](https://www.iotco.net/binarytrie.jpg)
+![nfv binary-trie](binarytrie.jpg)
 #### Usage:
 ```
 import BinaryNode
@@ -31,7 +31,7 @@ root.AddChild("189.xxx.xxx.xxx", '101111')
 ```
 #
 ### Multibit Trie
-![nfv multibit-trie](https://www.iotco.net/multibit.jpg)
+![nfv multibit-trie](multibit.jpg)
 #### Usage:
 ```
 import MultibitNode
@@ -56,7 +56,7 @@ where:
  
 ## Result  
 result with considering the time complexity of algorithm
-![nfv resault](https://www.iotco.net/nfv.jpg)  
+![nfv resault](nfv.jpg)  
 ## Virtual machines
 Download the following virtual machines to develop your project:  
 
