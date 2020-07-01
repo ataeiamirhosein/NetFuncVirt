@@ -55,8 +55,9 @@ where:
  - 'Default value' is the value the is returned in case Lookup fails (e.g. '0')  
  
 ## Result  
-result with considering the time complexity of algorithm
+result with considering the time complexity of algorithm  
 ![nfv resault](nfv.jpg)  
+
 ## Virtual machines
 Download the following virtual machines to develop your project:  
 
