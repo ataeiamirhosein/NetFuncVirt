@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 from threading import Thread
 
-file1 = open('tosearch1.txt', 'r') 
+file1 = open('tosearch.txt', 'r') 
 my_list = file1.readlines() 
 
 
